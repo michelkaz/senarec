@@ -17,12 +17,22 @@ export default {
         // Rouge — intensité maîtrisée
         signal: '#CE1126',
         signalDeep: '#8F0C1B',
+        // Portail gouvernemental (direction retenue)
+        gov: '#004b9b',
+        govDark: '#002b5c',
+        govNight: '#002244',
+        rdcBlue: '#0072CE',
+        rdcGold: '#F7D618',
+        rdcRed: '#E53935',
+        sable: '#F6F1E7', // beige clair (sections claires)
+        sableDeep: '#E7DFCF',
+        redText: '#C62828', // rouge lisible sur fond clair
       },
       fontFamily: {
-        heading: ['"Plus Jakarta Sans"', 'sans-serif'],
+        heading: ['Montserrat', 'sans-serif'],
         serif: ['"Cormorant Garamond"', 'serif'],
         mono: ['"IBM Plex Mono"', 'monospace'],
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Montserrat', 'sans-serif'],
       },
       maxWidth: {
         content: '1400px',

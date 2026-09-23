@@ -1,17 +1,17 @@
 import { Outlet } from 'react-router-dom';
-import Navbar from '../Navbar';
-import Footer from '../Footer';
+import GovHeader from '../gov/GovHeader';
+import GovFooter from '../gov/GovFooter';
 import ScrollToTop from './ScrollToTop';
 
 export default function Layout() {
   return (
     <div className="min-h-screen bg-mineral">
       <ScrollToTop />
-      <Navbar />
-      <main>
+      <GovHeader />
+      <main id="contenu" className="pt-[120px]">
         <Outlet />
       </main>
-      <Footer />
+      <GovFooter />
     </div>
   );
 }

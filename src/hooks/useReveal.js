@@ -6,7 +6,7 @@ export function useReveal(selector, opts = {}) {
 
   useEffect(() => {
     const root = rootRef.current;
-    if (!root) return undefined;
+    if (!root || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
 
     const targets = Array.from(root.querySelectorAll(selector));
     if (!targets.length) return undefined;
