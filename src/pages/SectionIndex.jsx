@@ -6,7 +6,7 @@ import { Alternate, Block, Card, PageHero } from '../components/gov/ui';
 const PHOTOS = {
   '/le-senarec': ['/images/hero-3.jpg', 'Siège du SENAREC à Kinshasa'],
   '/renforcement-capacites': ['/images/hero-2.jpeg', 'Cohorte de cadres formés avec leurs certificats'],
-  '/ressources': ['/images/projets/5.png', 'Séminaire gouvernemental national'],
+  '/ressources': ['/images/projets/5.jpg', 'Séminaire gouvernemental national'],
 };
 
 // Page d'entrée d'une rubrique : présente ses sous-pages, pour ne pas dépendre du seul menu.

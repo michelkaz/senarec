@@ -7,7 +7,7 @@ const DURATION = 7000;
 // Textes et images réels : ABOUT / PROJECTS de src/data/content.js.
 const SLIDES = [
   {
-    axe: 'Axe 01 • Institution',
+    axe: 'Axe 01 • Mission',
     tab: 'Guichet unique du renforcement des capacités',
     img: '/images/hero-2.jpeg',
     title: 'Former pour transformer',
@@ -15,17 +15,17 @@ const SLIDES = [
     cta: ['Découvrir le SENAREC', '/le-senarec/presentation'],
   },
   {
-    axe: 'Axe 02 • Institutions',
-    tab: 'Assemblées provinciales',
-    img: '/images/projets/6.jpeg',
-    title: 'Renforcement des capacités des Assemblées provinciales',
-    text: 'Un appui du SENAREC aux institutions provinciales, en présence de ses partenaires.',
-    cta: ['Voir les programmes & projets', '/renforcement-capacites/programmes'],
+    axe: 'Axe 02 • Concertation',
+    tab: 'États généraux du Patrimoine',
+    img: '/images/projets/3.jpg',
+    title: 'États Généraux du Patrimoine',
+    text: 'Grandes concertations nationales portées ou suivies par le SENAREC, en présence de ses partenaires.',
+    cta: ['Voir les activités', '/renforcement-capacites/activites'],
   },
   {
     axe: 'Axe 03 • Certification',
     tab: 'Formation PMP selon les standards du PMI',
-    img: '/images/projets/4.png',
+    img: '/images/projets/4.jpg',
     title: 'Formation PMP selon les standards du PMI',
     text: 'Des cadres et agents de l’État formés au management de projet selon les standards internationaux.',
     cta: ['Voir les programmes & projets', '/renforcement-capacites/programmes'],
@@ -33,7 +33,7 @@ const SLIDES = [
   {
     axe: 'Axe 04 • Réforme',
     tab: 'Séminaires gouvernementaux',
-    img: '/images/projets/5.png',
+    img: '/images/projets/5.jpg',
     title: 'Séminaire Gouvernemental National',
     text: 'Concertation des responsables de l’État pour accompagner la mise en œuvre des politiques publiques et les réformes.',
     cta: ['Actualités & activités', '/renforcement-capacites/activites'],
@@ -53,7 +53,7 @@ export default function GovHero() {
 
   const s = SLIDES[i];
   return (
-    <section aria-roledescription="carrousel" aria-label="À la une" className="relative bg-slate-900">
+    <section id="axes" aria-roledescription="carrousel" aria-label="À la une" className="relative bg-slate-900">
       <div className="relative overflow-hidden bg-govNight">
         {SLIDES.map((sl, n) => (
           <img

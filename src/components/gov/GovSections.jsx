@@ -4,7 +4,7 @@ import { useReveal } from '../../hooks/useReveal';
 import FullPhoto from './FullPhoto';
 import { useCountUp } from '../../hooks/useCountUp';
 import { ArrowRight, Landmark, Mail, MapPin, Phone } from 'lucide-react';
-import { ABOUT, CONTACT, LEGAL, MANDATE, PROJECTS, STATS } from '../../data/content';
+import { ABOUT, CONTACT, MANDATE, PROJECTS, STATS } from '../../data/content';
 import { ACTIVITES, COMMUNICATIONS, section } from '../../data/site';
 
 const wrap = 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8';
@@ -30,7 +30,7 @@ function Head({ eyebrow, title, to, link, dark }) {
 const Y = ({ children }) => <span className="text-rdcGold">{children}</span>;
 const R = ({ children }) => <span className="text-redText">{children}</span>;
 
-const BG = ['/images/projets/5.png', '/images/hero-2.jpeg', '/images/projets/2.png', '/images/projets/8.png'];
+const BG = ['/images/projets/5.jpg', '/images/hero-2.jpeg', '/images/projets/2.jpg', '/images/projets/8.jpg'];
 
 function Stat({ s }) {
   const [ref, v] = useCountUp(s.value);
@@ -195,7 +195,6 @@ export function ContactBand() {
               <li className="flex items-center gap-2.5"><MapPin size={18} className="text-rdcGold" />{CONTACT.address}</li>
               <li className="flex items-center gap-2.5"><Phone size={18} className="text-rdcGold" />{CONTACT.phone}</li>
               <li className="flex items-center gap-2.5"><Mail size={18} className="text-rdcGold" />{CONTACT.email}</li>
-              <li className="flex items-center gap-2.5 text-slate-300">{LEGAL.decret35.label}</li>
             </ul>
           </div>
           <div className="lg:col-span-4">

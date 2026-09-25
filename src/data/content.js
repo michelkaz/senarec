@@ -81,25 +81,25 @@ export const STATS = [
 ];
 
 export const PROJECTS = [
-  { img: '/images/projets/1.png', title: "Projet d'Appui au Leadership féminin" },
-  { img: '/images/projets/2.png', title: 'Séminaires Gouvernementaux en Province' },
-  { img: '/images/projets/3.png', title: 'États Généraux du Patrimoine' },
-  { img: '/images/projets/4.png', title: 'Formation PMP selon les standards du PMI' },
-  { img: '/images/projets/5.png', title: 'Séminaire Gouvernemental National' },
-  { img: '/images/projets/6.jpeg', title: 'Renforcement des capacités des Assemblées provinciales' },
+  { img: '/images/projets/1.jpg', title: "Projet d'Appui au Leadership féminin" },
+  { img: '/images/projets/2.jpg', title: 'Séminaires Gouvernementaux en Province' },
+  { img: '/images/projets/3.jpg', title: 'États Généraux du Patrimoine' },
+  { img: '/images/projets/4.jpg', title: 'Formation PMP selon les standards du PMI' },
+  { img: '/images/projets/5.jpg', title: 'Séminaire Gouvernemental National' },
+  { img: '/images/projets/6.jpg', title: 'Renforcement des capacités des Assemblées provinciales' },
   {
-    img: '/images/projets/7.png',
+    img: '/images/projets/7.jpg',
     title: 'Appui à la Gouvernance et au Développement des Compétences',
     note: 'En soutien au Programme de Transformation de l’Agriculture',
   },
-  { img: '/images/projets/8.png', title: 'Appui à la planification, au suivi et à l’évaluation des politiques publiques' },
+  { img: '/images/projets/8.jpg', title: 'Appui à la planification, au suivi et à l’évaluation des politiques publiques' },
 ];
 
 export const TEAM = [
   { name: 'Marcel KANDA MUKANYA', role: 'Coordonnateur National' },
   { name: 'Paulin ILUNGA KATAMBA', role: 'Coordonnateur National Adjoint' },
   { name: 'Sarah DOMBASI LUFUAKENDA', role: 'Directrice Administrative et Financière' },
-  { name: 'Nicolas YOBI BIYOYI', role: 'Directeur des Ressources Humaines' },
+  { name: 'EPENGE OMOTONDO LAUREINE', role: 'Direction des Ressources Humaines' },
   { name: 'Patricia MULAND KASAJ', role: 'Directrice Technique' },
 ];
 

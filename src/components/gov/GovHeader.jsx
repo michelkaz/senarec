@@ -40,7 +40,7 @@ function Desktop() {
               type="button"
               aria-expanded={open === i}
               onClick={() => setOpen(open === i ? null : i)}
-              className={`${base} inline-flex items-center gap-1 text-white/85 hover:text-white hover:bg-white/10`}
+              className={`${base} inline-flex items-center gap-1 ${pathname.startsWith(item.to) ? 'bg-gov text-white' : 'text-white/85 hover:text-white hover:bg-white/10'}`}
             >
               {item.label}
               <ChevronDown size={14} />
@@ -155,15 +155,12 @@ export default function GovHeader() {
       <div className="bg-govDark">
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
           <Link to="/" className="flex items-center gap-3 shrink-0" aria-label="SENAREC — accueil">
-            <img src="/images/minplan.png" alt="Ministère du Plan — République Démocratique du Congo" className="h-12 w-auto bg-white rounded-md px-2 py-1" />
+            <img src="/images/minplan.png" alt="Ministère du Plan — République Démocratique du Congo" className="h-12 w-auto bg-white rounded-md px-2 py-1 max-sm:h-10" />
             <span className="hidden sm:block w-px h-10 bg-white/25" aria-hidden="true" />
-            <img src="/images/emblem.png" alt="" className="h-12 w-auto bg-white rounded-md p-1" />
-            <div className="hidden sm:flex flex-col border-l border-white/20 pl-3">
-              <span className="font-extrabold text-lg text-white tracking-tight leading-none uppercase">SENAREC</span>
-              <span className="hidden 2xl:block text-[10px] text-slate-300 font-semibold tracking-wider uppercase mt-1 leading-tight">
-                Secrétariat National pour le<br />Renforcement des Capacités
-              </span>
-            </div>
+            <span className="flex flex-col items-center bg-white rounded-md px-2.5 pt-1 pb-0.5">
+              <img src="/images/emblem.png" alt="" className="h-8 w-auto" />
+              <span className="text-[11px] font-extrabold tracking-widest text-govDark leading-none mt-0.5">SENAREC</span>
+            </span>
           </Link>
           <Desktop />
           <div className="flex items-center gap-2 shrink-0">

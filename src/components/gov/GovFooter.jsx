@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail } from 'lucide-react';
-import { CONTACT, LEGAL, SOCIALS } from '../../data/content';
+import { CONTACT, SOCIALS } from '../../data/content';
 import { NAV_TREE } from '../../data/site';
 import { FacebookIcon, XIcon, LinkedinIcon, YoutubeIcon, WhatsappIcon } from '../SocialIcons';
 
@@ -88,7 +88,6 @@ export default function GovFooter() {
       <div className="bg-black/40 text-slate-400 text-[11px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between gap-2">
           <span>© {new Date().getFullYear()} République Démocratique du Congo — SENAREC. Tous droits réservés.</span>
-          <span>{LEGAL.decret35.label} du {LEGAL.decret35.date}</span>
         </div>
       </div>
     </footer>
