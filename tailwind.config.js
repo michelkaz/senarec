@@ -26,7 +26,7 @@ export default {
         rdcRed: '#E53935',
         sable: '#F6F1E7', // beige clair (sections claires)
         sableDeep: '#E7DFCF',
-        redText: '#C62828', // rouge lisible sur fond clair
+        redText: '#B71C1C', // rouge lisible sur fond clair
       },
       fontFamily: {
         heading: ['Montserrat', 'sans-serif'],

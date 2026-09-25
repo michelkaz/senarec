@@ -1,34 +1,37 @@
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { NAV_TREE } from '../../data/site';
+import { OG_IMAGE, SITE, routeMeta } from '../../data/seo';
 
-const BASE = 'SENAREC';
-const DEFAULT_DESC = "SENAREC — Secrétariat National pour le Renforcement des Capacités, guichet unique des activités de renforcement des capacités en République Démocratique du Congo.";
+const setMeta = (sel, attr, key, value) => {
+  let el = document.head.querySelector(sel);
+  if (!el) {
+    el = document.createElement(attr === 'href' ? 'link' : 'meta');
+    if (attr === 'href') el.setAttribute('rel', key);
+    else el.setAttribute(sel.includes('property') ? 'property' : 'name', key);
+    document.head.appendChild(el);
+  }
+  el.setAttribute(attr, value);
+};
 
-const flat = [];
-NAV_TREE.forEach((n) => {
-  flat.push([n.to, n.label, n.desc]);
-  n.children?.forEach((c) => flat.push([c.to, c.label, c.desc]));
-});
-
-// React 19 remonte <title> et <meta> dans <head> : un titre et une description par page.
+// Les balises sont déjà présentes dans le HTML pré-généré (scripts/postbuild.mjs) ;
+// ici on les met à jour à chaque navigation, sans jamais en dupliquer.
 export default function Seo() {
   const { pathname } = useLocation();
-  const page = flat.find(([to]) => to === pathname);
-  const home = pathname === '/';
-  const label = home ? null : page?.[1] ?? 'Page introuvable';
-  const title = home ? 'SENAREC — Guichet unique du renforcement des capacités en RDC' : `${label} | ${BASE}`;
-  const desc = (page?.[2] && `${page[2]} — ${BASE}, République Démocratique du Congo.`) || DEFAULT_DESC;
-  return (
-    <>
-      <title>{title}</title>
-      <meta name="description" content={desc} />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={desc} />
-      <meta property="og:type" content="website" />
-      <meta property="og:locale" content="fr_CD" />
-      <meta property="og:image" content="/images/projets/6.jpg" />
-      <meta name="twitter:card" content="summary_large_image" />
-      {!page && !home && <meta name="robots" content="noindex" />}
-    </>
-  );
+  useEffect(() => {
+    const m = routeMeta(pathname);
+    const url = `${SITE}${m.path === '/' ? '' : m.path}`;
+    document.title = m.title;
+    setMeta('meta[name="description"]', 'content', 'description', m.description);
+    setMeta('meta[name="robots"]', 'content', 'robots', m.indexable ? 'index, follow' : 'noindex, follow');
+    if (m.path === '/404') document.head.querySelector('link[rel="canonical"]')?.remove();
+    else setMeta('link[rel="canonical"]', 'href', 'canonical', url);
+    setMeta('meta[property="og:url"]', 'content', 'og:url', m.path === '/404' ? SITE : url);
+    setMeta('meta[property="og:title"]', 'content', 'og:title', m.title);
+    setMeta('meta[property="og:description"]', 'content', 'og:description', m.description);
+    setMeta('meta[property="og:image"]', 'content', 'og:image', OG_IMAGE);
+    setMeta('meta[name="twitter:title"]', 'content', 'twitter:title', m.title);
+    setMeta('meta[name="twitter:description"]', 'content', 'twitter:description', m.description);
+    setMeta('meta[name="twitter:image"]', 'content', 'twitter:image', OG_IMAGE);
+  }, [pathname]);
+  return null;
 }

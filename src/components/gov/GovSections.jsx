@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useReveal } from '../../hooks/useReveal';
 import FullPhoto from './FullPhoto';
+import Photo, { Backdrop } from './Photo';
 import { useCountUp } from '../../hooks/useCountUp';
-import { ArrowRight, Landmark, Mail, MapPin, Phone } from 'lucide-react';
+import { ArrowRight, Landmark, Mail, MapPin, Pause, Phone, Play } from 'lucide-react';
 import { ABOUT, CONTACT, MANDATE, PROJECTS, STATS } from '../../data/content';
 import { ACTIVITES, COMMUNICATIONS, section } from '../../data/site';
 
@@ -47,16 +48,23 @@ function Stat({ s }) {
 export function Indicators() {
   const [bg, setBg] = useState(0);
   const rootRef = useReveal('.stat', { stagger: 0.12, y: 30 });
+  const secRef = useRef(null);
+  const [visible, setVisible] = useState(false);
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { threshold: 0.1 });
+    if (secRef.current) io.observe(secRef.current);
+    return () => io.disconnect();
+  }, []);
+  useEffect(() => {
+    if (!visible || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
     const t = setInterval(() => setBg((n) => (n + 1) % BG.length), 5000);
     return () => clearInterval(t);
-  }, []);
+  }, [visible]);
 
   return (
-    <section className="relative text-white py-20 overflow-hidden bg-govNight">
+    <section ref={secRef} className="relative text-white py-20 overflow-hidden bg-govNight">
       {BG.map((src, n) => (
-        <img key={src} src={src} alt="" aria-hidden="true" className={`absolute inset-0 w-full h-full object-cover blur-3xl scale-125 transition-opacity duration-[1500ms] ${n === bg ? 'opacity-100' : 'opacity-0'}`} />
+        <Backdrop key={src} src={src} className={`absolute inset-0 w-full h-full object-cover blur-3xl scale-125 transition-opacity duration-[1500ms] ${n === bg ? 'opacity-100' : 'opacity-0'}`} />
       ))}
       <div className="absolute inset-0 bg-govNight/85" />
       <div className="absolute inset-0 grid-move" aria-hidden="true" />
@@ -77,15 +85,19 @@ export function Indicators() {
 const PARTNERS = ['PNUD', 'Banque mondiale', 'ONU Femmes', 'PMI RDC', 'Cisco', 'Ministère du Plan'];
 
 export function PartnersBand() {
+  const [paused, setPaused] = useState(false);
   const items = [...PARTNERS, ...PARTNERS, ...PARTNERS, ...PARTNERS];
   return (
-    <section aria-label="Partenaires visibles dans les supports du SENAREC" className="bg-sable border-y border-sableDeep py-6 overflow-hidden marquee">
+    <section aria-label="Partenaires visibles dans les supports du SENAREC" className="bg-sable border-y border-sableDeep py-6 overflow-hidden marquee relative">
       {/* À COMPLÉTER : logos officiels et nature de chaque partenariat, à valider */}
-      <div className="marquee-track flex w-max gap-12 whitespace-nowrap" aria-hidden="true">
+      <ul className="marquee-track flex w-max gap-12 whitespace-nowrap" style={{ animationPlayState: paused ? 'paused' : 'running' }}>
         {items.map((p, n) => (
-          <span key={n} className="text-xl font-extrabold text-govDark/30 hover:text-redText uppercase tracking-widest transition-colors">{p}</span>
+          <li key={n} aria-hidden={n >= PARTNERS.length ? 'true' : undefined} className="text-xl font-extrabold text-govDark/50 uppercase tracking-widest">{p}</li>
         ))}
-      </div>
+      </ul>
+      <button type="button" onClick={() => setPaused((v) => !v)} aria-pressed={paused} aria-label={paused ? 'Reprendre le défilement des partenaires' : 'Mettre en pause le défilement des partenaires'} className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border border-sableDeep text-govDark flex items-center justify-center shadow hover:bg-govDark hover:text-white">
+        {paused ? <Play size={16} /> : <Pause size={16} />}
+      </button>
     </section>
   );
 }
@@ -113,7 +125,7 @@ export function Mandat() {
           </div>
         </div>
         <figure className="lg:col-span-5">
-          <img src="/images/hero-3.jpg" alt="Siège du SENAREC à Kinshasa" className="w-full h-[400px] object-cover rounded-lg shadow-xl border-b-8 border-rdcGold" />
+          <Photo src="/images/hero-3.jpg" alt="Siège du SENAREC à Kinshasa" sizes="(min-width:1024px) 40vw, 100vw" className="w-full h-auto rounded-lg shadow-xl border-b-8 border-rdcGold" />
         </figure>
       </div>
     </section>
@@ -193,8 +205,8 @@ export function ContactBand() {
             <h2 className="text-2xl sm:text-4xl font-extrabold">Écrire au <Y>SENAREC</Y></h2>
             <ul className="grid sm:grid-cols-2 gap-3 text-xs text-slate-200 pt-2">
               <li className="flex items-center gap-2.5"><MapPin size={18} className="text-rdcGold" />{CONTACT.address}</li>
-              <li className="flex items-center gap-2.5"><Phone size={18} className="text-rdcGold" />{CONTACT.phone}</li>
-              <li className="flex items-center gap-2.5"><Mail size={18} className="text-rdcGold" />{CONTACT.email}</li>
+              <li className="flex items-center gap-2.5"><Phone size={18} className="text-rdcGold" /><a href={`tel:${CONTACT.phone.replace(/\s/g, '')}`} className="hover:underline">{CONTACT.phone}</a></li>
+              <li className="flex items-center gap-2.5"><Mail size={18} className="text-rdcGold" /><a href={`mailto:${CONTACT.email}`} className="hover:underline">{CONTACT.email}</a></li>
             </ul>
           </div>
           <div className="lg:col-span-4">

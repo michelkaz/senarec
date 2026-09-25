@@ -79,15 +79,16 @@ export default function GovFooter() {
           </ul>
           <ul className="space-y-3 text-xs text-slate-300">
             <li className="flex gap-2.5"><MapPin size={16} className="text-rdcGold shrink-0 mt-0.5" />{CONTACT.address}</li>
-            <li className="flex gap-2.5"><Phone size={16} className="text-rdcGold shrink-0" />{CONTACT.phone}</li>
-            <li className="flex gap-2.5"><Mail size={16} className="text-rdcGold shrink-0" />{CONTACT.email}</li>
+            <li className="flex gap-2.5"><Phone size={16} className="text-rdcGold shrink-0" /><a href={`tel:${CONTACT.phone.replace(/\s/g, '')}`} className="hover:text-white hover:underline">{CONTACT.phone}</a></li>
+            <li className="flex gap-2.5"><Mail size={16} className="text-rdcGold shrink-0" /><a href={`mailto:${CONTACT.email}`} className="hover:text-white hover:underline">{CONTACT.email}</a></li>
           </ul>
         </div>
       </div>
 
-      <div className="bg-black/40 text-slate-400 text-[11px]">
+      <div className="bg-black/40 text-slate-300 text-[11px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between gap-2">
           <span>© {new Date().getFullYear()} République Démocratique du Congo — SENAREC. Tous droits réservés.</span>
+          <Link to="/confidentialite" className="hover:text-white underline-offset-4 hover:underline">Confidentialité</Link>
         </div>
       </div>
     </footer>

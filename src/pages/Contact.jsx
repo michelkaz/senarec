@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { CheckCircle2, Loader2, Mail, MapPin, Phone } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { CONTACT, SOCIALS } from '../data/content';
 import { FacebookIcon, XIcon, LinkedinIcon, YoutubeIcon, WhatsappIcon } from '../components/SocialIcons';
 import { Accent, Alternate, Block, Card, HeroAccent, PageHero } from '../components/gov/ui';
@@ -42,7 +43,11 @@ function Form() {
     if (status === 'sending') return;
     const n = check(f);
     setErr(n);
-    if (Object.keys(n).length) return;
+    const firstBad = ['nom', 'email', 'organisme', 'telephone', 'message'].find((k) => n[k]);
+    if (firstBad) {
+      document.getElementById(firstBad)?.focus();
+      return;
+    }
     setStatus('sending');
     setNotice('');
     try {
@@ -69,14 +74,14 @@ function Form() {
   const field = (k, label, type = 'text', req, auto) => (
     <div>
       <label htmlFor={k} className="block text-sm font-semibold text-govDark mb-1">{label}{req && <span className="text-redText"> *</span>}</label>
-      <input id={k} type={type} value={f[k]} onChange={set(k)} maxLength={k === 'email' ? 254 : 150} autoComplete={auto} aria-invalid={!!err[k]} aria-describedby={err[k] ? `${k}-e` : undefined} className={`${inp} ${err[k] ? 'border-rdcRed' : 'border-sableDeep'}`} />
+      <input id={k} name={k} type={type} value={f[k]} onChange={set(k)} required={req} aria-required={req || undefined} maxLength={k === 'email' ? 254 : 150} autoComplete={auto} aria-invalid={!!err[k]} aria-describedby={err[k] ? `${k}-e` : undefined} className={`${inp} ${err[k] ? 'border-rdcRed' : 'border-sableDeep'}`} />
       {err[k] && <p id={`${k}-e`} role="alert" className="text-xs text-redText mt-1">{err[k]}</p>}
     </div>
   );
 
   if (status === 'sent') {
     return (
-      <div role="status" className="bg-white rounded-lg border border-sableDeep p-8 shadow-sm text-center">
+      <div role="status" aria-live="polite" className="bg-white rounded-lg border border-sableDeep p-8 shadow-sm text-center">
         <CheckCircle2 size={44} className="mx-auto text-emerald-600" />
         <h3 className="text-xl font-bold text-govDark mt-4">Message envoyé</h3>
         <p className="text-sm text-slate-600 mt-2">Merci, votre message a bien été transmis au SENAREC.</p>
@@ -97,18 +102,19 @@ function Form() {
       </div>
       <div className="sm:col-span-2">
         <label htmlFor="message" className="block text-sm font-semibold text-govDark mb-1">Message <span className="text-redText">*</span></label>
-        <textarea id="message" rows={6} maxLength={LIMIT} value={f.message} onChange={set('message')} aria-invalid={!!err.message} aria-describedby={err.message ? 'message-e' : undefined} className={`${inp} resize-y ${err.message ? 'border-rdcRed' : 'border-sableDeep'}`} />
+        <textarea id="message" name="message" required aria-required="true" rows={6} maxLength={LIMIT} value={f.message} onChange={set('message')} aria-invalid={!!err.message} aria-describedby={err.message ? 'message-e' : undefined} className={`${inp} resize-y ${err.message ? 'border-rdcRed' : 'border-sableDeep'}`} />
         <div className="flex justify-between text-xs mt-1">
           <span id="message-e" role="alert" className="text-redText">{err.message}</span>
-          <span className="text-slate-400 tabular-nums">{f.message.length}/{LIMIT}</span>
+          <span className="text-slate-500 tabular-nums">{f.message.length}/{LIMIT}</span>
         </div>
       </div>
+      <p className="sr-only" role="status" aria-live="polite">{status === 'sending' ? 'Envoi en cours…' : status === 'error' ? notice : ''}</p>
       {notice && <p role="alert" className="sm:col-span-2 text-sm text-redText bg-red-50 border border-red-200 rounded px-4 py-3">{notice}</p>}
       <div className="sm:col-span-2 flex flex-wrap items-center gap-4">
         <button type="submit" disabled={status === 'sending'} className="inline-flex items-center gap-2 bg-govDark hover:bg-gov disabled:opacity-60 text-white font-bold text-sm px-7 py-3.5 rounded uppercase tracking-wider">
           {status === 'sending' ? <><Loader2 size={16} className="animate-spin" /> Envoi…</> : 'Envoyer'}
         </button>
-        <p className="text-xs text-slate-500 max-w-md">Vos informations servent uniquement à traiter votre demande.</p>
+        <p className="text-xs text-slate-500 max-w-md">Vos informations servent uniquement à traiter votre demande. <Link to="/confidentialite" className="underline font-semibold">Confidentialité</Link></p>
       </div>
     </form>
   );
@@ -122,9 +128,9 @@ export default function Contact() {
         <Block eyebrow="Coordonnées" title={<>Nous <Accent>joindre</Accent></>}>
           <div className="grid lg:grid-cols-5 gap-6">
             <Card className="lg:col-span-2 space-y-5" accent="border-l-rdcBlue">
-              <p className="flex gap-3 text-sm"><MapPin size={20} className="text-rdcGold shrink-0" />{CONTACT.address}</p>
-              <p className="flex gap-3 text-sm"><Phone size={20} className="text-rdcGold shrink-0" /><a href={`tel:${CONTACT.phone.replace(/\s/g, '')}`} className="hover:underline">{CONTACT.phone}</a></p>
-              <p className="flex gap-3 text-sm"><Mail size={20} className="text-rdcGold shrink-0" /><a href={`mailto:${CONTACT.email}`} className="hover:underline">{CONTACT.email}</a></p>
+              <p className="flex gap-3 text-sm"><MapPin size={20} className="text-redText shrink-0" />{CONTACT.address}</p>
+              <p className="flex gap-3 text-sm"><Phone size={20} className="text-redText shrink-0" /><a href={`tel:${CONTACT.phone.replace(/\s/g, '')}`} className="hover:underline">{CONTACT.phone}</a></p>
+              <p className="flex gap-3 text-sm"><Mail size={20} className="text-redText shrink-0" /><a href={`mailto:${CONTACT.email}`} className="hover:underline">{CONTACT.email}</a></p>
               <ul className="flex gap-3 pt-2">
                 {SOCIALS.map(({ key, href, label }) => {
                   const Icon = ICONS[key];

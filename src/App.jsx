@@ -15,6 +15,7 @@ import Structures from './pages/capacites/Structures';
 import { Publications, Rapports, Guides, Mediatheque } from './pages/ressources-pages';
 import { Actualites, Evenements, Partenaires } from './pages/Simples';
 import Contact from './pages/Contact';
+import Confidentialite from './pages/Confidentialite';
 import NotFound from './pages/NotFound';
 
 export default function App() {
@@ -44,6 +45,7 @@ export default function App() {
           <Route path="evenements" element={<Evenements />} />
           <Route path="partenaires" element={<Partenaires />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="confidentialite" element={<Confidentialite />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

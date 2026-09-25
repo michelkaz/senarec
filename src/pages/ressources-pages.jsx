@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
 import { LEGAL, PROJECTS } from '../data/content';
 import FullPhoto from '../components/gov/FullPhoto';
+import { photoUrl } from '../components/gov/Photo';
 import { Accent, Alternate, Block, Card, HeroAccent, InProgress, PageHero, Text } from '../components/gov/ui';
 
 const crumbs = (label) => [{ label: 'Ressources', to: '/ressources' }, { label }];
@@ -70,19 +71,49 @@ export function Guides() {
 const PHOTOS = PROJECTS.map((p) => ({ src: p.img, title: p.title }));
 
 function Lightbox({ item, onClose }) {
+  const box = useRef(null);
+  const closeBtn = useRef(null);
   useEffect(() => {
-    const esc = (e) => e.key === 'Escape' && onClose();
-    document.addEventListener('keydown', esc);
+    const opener = document.activeElement; // bouton qui a ouvert la galerie
+    closeBtn.current?.focus();
+    const scrollY = window.scrollY;
+    const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    const onKey = (e) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        onClose();
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      // Piège à focus : Tab et Maj+Tab restent dans la fenêtre.
+      const f = box.current?.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])');
+      if (!f?.length) return;
+      const first = f[0];
+      const last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      } else if (!box.current.contains(document.activeElement)) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener('keydown', onKey);
     return () => {
-      document.removeEventListener('keydown', esc);
-      document.body.style.overflow = '';
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+      window.scrollTo(0, scrollY);
+      opener?.focus?.({ preventScroll: true });
     };
   }, [onClose]);
   return (
-    <div role="dialog" aria-modal="true" aria-label={item.title} className="fixed inset-0 z-[70] bg-black/90 flex flex-col items-center justify-center p-4" onClick={onClose}>
-      <button type="button" aria-label="Fermer" autoFocus onClick={onClose} className="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center"><X size={22} /></button>
-      <img src={item.src} alt={item.title} className="max-h-[80vh] max-w-full object-contain rounded" onClick={(e) => e.stopPropagation()} />
+    <div ref={box} role="dialog" aria-modal="true" aria-label={item.title} className="fixed inset-0 z-[70] bg-black/90 flex flex-col items-center justify-center p-4" onClick={onClose}>
+      <button ref={closeBtn} type="button" aria-label="Fermer" onClick={onClose} className="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center"><X size={22} /></button>
+      <img src={photoUrl(item.src, 1600)} alt={item.title} className="max-h-[80vh] max-w-full object-contain rounded" onClick={(e) => e.stopPropagation()} />
       <p className="text-white mt-4 text-sm font-semibold text-center">{item.title}</p>
     </div>
   );

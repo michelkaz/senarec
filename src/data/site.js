@@ -2,7 +2,7 @@
 // Les libellés et descriptions courtes ne contiennent aucune donnée métier inventée.
 
 export const NAV_TREE = [
-  { label: 'Accueil', to: '/' },
+  { label: 'Accueil', to: '/', desc: 'Guichet unique des activités de renforcement des capacités en République Démocratique du Congo.' },
   {
     label: 'Le SENAREC',
     to: '/le-senarec',
@@ -38,10 +38,10 @@ export const NAV_TREE = [
       { label: 'Médiathèque', to: '/ressources/mediatheque', desc: 'Photographies et vidéos.' },
     ],
   },
-  { label: 'Actualités', to: '/actualites' },
-  { label: 'Événements', to: '/evenements' },
-  { label: 'Partenaires', to: '/partenaires' },
-  { label: 'Contact', to: '/contact' },
+  { label: 'Actualités', to: '/actualites', desc: 'Communiqués et informations institutionnelles du SENAREC.' },
+  { label: 'Événements', to: '/evenements', desc: 'Agenda des rendez-vous du SENAREC.' },
+  { label: 'Partenaires', to: '/partenaires', desc: 'Les institutions et organisations partenaires du SENAREC.' },
+  { label: 'Contact', to: '/contact', desc: 'Adresse, téléphone, email et formulaire de contact du SENAREC.' },
 ];
 
 export const section = (to) => NAV_TREE.find((n) => n.to === to);
@@ -57,3 +57,16 @@ export const ACTIVITES = [
 export const COMMUNICATIONS = [
   { label: 'Communiqués officiels', desc: 'Communications officielles du Secrétariat National pour le Renforcement des Capacités.' },
 ];
+
+// Pages dont le contenu n'est pas encore rédigé : lisibles mais non indexées (noindex, hors sitemap).
+export const THIN_PAGES = [
+  '/actualites',
+  '/evenements',
+  '/partenaires',
+  '/le-senarec/message-coordonnateur',
+  '/renforcement-capacites/formations',
+  '/ressources/publications',
+  '/ressources/rapports-etudes',
+];
+// Pages utilitaires : accessibles, jamais indexées.
+export const UTILITY_PAGES = [{ to: '/confidentialite', label: 'Confidentialité', desc: 'Information sur le traitement des données personnelles du site du SENAREC.' }];

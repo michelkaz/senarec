@@ -15,7 +15,7 @@ export default function Missions() {
           <div className="grid md:grid-cols-3 gap-5">
             {MANDATE.map((m, i) => (
               <Card key={m.title} accent={['border-l-rdcBlue', 'border-l-rdcGold', 'border-l-rdcRed'][i]} className="flex flex-col">
-                <span className="text-4xl font-extrabold text-rdcGold/80">0{i + 1}</span>
+                <span className="text-4xl font-extrabold text-rdcGold [.bg-white_&]:text-redText">0{i + 1}</span>
                 <h3 className="font-bold text-lg mt-2">{m.title}</h3>
                 <p className="text-sm opacity-85 mt-3 flex-1">{m.desc}</p>
                 <p className="text-xs font-semibold mt-4 opacity-70">{m.ref}</p>

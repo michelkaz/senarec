@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ChevronRight, Hammer } from 'lucide-react';
 import { useReveal } from '../../hooks/useReveal';
 import FullPhoto from './FullPhoto';
+import { Backdrop } from './Photo';
 
 export const wrap = 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8';
 const ToneContext = createContext('light');
@@ -19,7 +20,7 @@ export const HeroAccent = ({ children }) => <span className="text-rdcGold">{chil
 export function PageHero({ crumbs = [], eyebrow, title, lead, photo, photoAlt }) {
   return (
     <section className="relative overflow-hidden bg-govNight text-white">
-      {photo && <img src={photo} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover blur-3xl scale-125 opacity-40" />}
+      {photo && <Backdrop src={photo} className="absolute inset-0 w-full h-full object-cover blur-3xl scale-125 opacity-40" />}
       <div className="absolute inset-0 bg-gradient-to-r from-govNight via-govDark/90 to-govDark/60" />
       <div className="absolute inset-0 grid-move" aria-hidden="true" />
       <div className={`${wrap} relative py-12 lg:py-16 grid gap-10 ${photo ? 'lg:grid-cols-12 items-center' : ''}`}>
@@ -43,7 +44,7 @@ export function PageHero({ crumbs = [], eyebrow, title, lead, photo, photoAlt })
         </div>
         {photo && (
           <div className="rise lg:col-span-5" style={{ animationDelay: '.25s' }}>
-            <FullPhoto src={photo} alt={photoAlt} className="aspect-[3/2] rounded-lg shadow-2xl border-b-4 border-rdcGold" />
+            <FullPhoto src={photo} alt={photoAlt} sizes="(min-width:1024px) 40vw, 100vw" eager className="aspect-[3/2] rounded-lg shadow-2xl border-b-4 border-rdcGold" />
           </div>
         )}
       </div>

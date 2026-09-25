@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Photo, { Backdrop } from './Photo';
 import { ArrowRight, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 
 const DURATION = 7000;
@@ -56,11 +57,9 @@ export default function GovHero() {
     <section id="axes" aria-roledescription="carrousel" aria-label="À la une" className="relative bg-slate-900">
       <div className="relative overflow-hidden bg-govNight">
         {SLIDES.map((sl, n) => (
-          <img
+          <Backdrop
             key={sl.img}
             src={sl.img}
-            alt=""
-            aria-hidden="true"
             className={`absolute inset-0 w-full h-full object-cover blur-3xl scale-125 transition-opacity duration-1000 ${n === i ? 'opacity-60' : 'opacity-0'}`}
           />
         ))}
@@ -71,9 +70,9 @@ export default function GovHero() {
             <span className="rise inline-flex items-center gap-2 bg-rdcGold/20 border border-rdcGold/50 text-rdcGold px-3 py-1 rounded text-xs font-bold uppercase tracking-wider mb-4">
               <span className="w-2 h-2 rounded-full bg-rdcGold animate-ping" /> {s.axe}
             </span>
-            <h1 className="rise text-3xl sm:text-4xl xl:text-5xl font-extrabold leading-[1.1] tracking-tight mb-5" style={{ animationDelay: '.1s' }}>
+            <h2 className="rise text-3xl sm:text-4xl xl:text-5xl font-extrabold leading-[1.1] tracking-tight mb-5" style={{ animationDelay: '.1s' }}>
               {s.title}
-            </h1>
+            </h2>
             <p className="rise text-base text-slate-200 mb-7 leading-relaxed" style={{ animationDelay: '.2s' }}>{s.text}</p>
             <div className="rise flex items-center gap-3" style={{ animationDelay: '.3s' }}>
               <Link to={s.cta[1]} className="group inline-flex items-center gap-2 bg-rdcGold hover:bg-yellow-400 text-slate-900 font-bold text-sm px-6 py-3 rounded shadow-lg transition-transform hover:-translate-y-0.5">
@@ -91,10 +90,11 @@ export default function GovHero() {
           <div className="lg:col-span-7 order-1 lg:order-2">
             <div className="relative aspect-[3/2] rounded-lg overflow-hidden shadow-2xl border-b-4 border-rdcGold bg-govNight/60">
               {SLIDES.map((sl, n) => (
-                <img
+                <Photo
                   key={sl.img}
                   src={sl.img}
                   alt={n === i ? sl.title : ''}
+                  sizes="(min-width:1024px) 58vw, 100vw"
                   className={`absolute inset-0 w-full h-full object-contain transition-all duration-1000 ${n === i ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.03]'}`}
                 />
               ))}

@@ -47,14 +47,14 @@ export function Partenaires() {
       <Alternate>
         <Block eyebrow="Tutelle" title={<>Sous la coordination du <Accent>Ministère du Plan</Accent></>}>
           <Text>Le SENAREC est un service public créé sous la coordination du Ministère du Plan de la République Démocratique du Congo.</Text>
-          <img src="/images/minplan.png" alt="Ministère du Plan" className="mt-6 h-20 w-auto rounded bg-white p-2 border border-sableDeep" />
+          <img src="/images/minplan.png" alt="Ministère du Plan" width="370" height="148" loading="lazy" className="mt-6 h-20 w-auto rounded bg-white p-2 border border-sableDeep" />
         </Block>
         <Block eyebrow="Collaborations" title={<>Quatre catégories de <Accent>partenaires</Accent></>}>
           <ul className="grid sm:grid-cols-2 gap-5 mb-8">
             {PARTNER_GROUPS.map((g, i) => (
               <Card key={g} as="li" accent={['border-l-rdcBlue', 'border-l-rdcGold', 'border-l-rdcRed', 'border-l-rdcBlue'][i]}>
                 <h3 className="font-bold">{g}</h3>
-                <span className="mt-3 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-rdcGold">
+                <span className="mt-3 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-rdcGold [.bg-white_&]:text-redText">
                   <span className="dot-pulse w-2 h-2 rounded-full bg-rdcGold" /> En cours de rédaction
                 </span>
               </Card>
