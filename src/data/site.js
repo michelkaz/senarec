@@ -58,13 +58,11 @@ export const COMMUNICATIONS = [
   { label: 'Communiqués officiels', desc: 'Communications officielles du Secrétariat National pour le Renforcement des Capacités.' },
 ];
 
-// Pages dont le contenu n'est pas encore rédigé : lisibles mais non indexées (noindex, hors sitemap).
+// Pages dont le contenu n'est pas encore rédigé ou validé : lisibles mais non
+// indexées (noindex, hors sitemap) tant que le fond n'est pas suffisant ou final.
 export const THIN_PAGES = [
-  '/actualites',
-  '/evenements',
-  '/partenaires',
-  '/le-senarec/message-coordonnateur',
-  '/renforcement-capacites/formations',
+  '/evenements', // un seul événement archivé, pas encore d'agenda à venir
+  '/le-senarec/message-coordonnateur', // projet de texte, non signé ni daté
   '/ressources/publications',
   '/ressources/rapports-etudes',
 ];

@@ -1,5 +1,6 @@
 import { CEARC, SUPPORT_POOLS } from '../../data/content';
-import { Accent, Alternate, Block, Card, HeroAccent, InProgress, PageHero } from '../../components/gov/ui';
+import { STRUCTURES, CENTRES_CAVEAT } from '../../data/cahier';
+import { Accent, Alternate, Block, Card, Caveat, DataTable, HeroAccent, PageHero } from '../../components/gov/ui';
 
 export default function Structures() {
   const cpparc = CEARC.organes.find((o) => o.name.includes('CPPARC'));
@@ -25,8 +26,17 @@ export default function Structures() {
             ))}
           </ul>
         </Block>
-        <Block eyebrow="Répertoire" title="Liste des structures">
-          <InProgress title="Répertoire en cours de rédaction" text="La liste des structures et centres, avec leur localisation et leur rôle, sera publiée après validation." compact />
+        <Block eyebrow="Répertoire" title="Centres et structures mentionnés">
+          <DataTable
+            keyField="nom"
+            columns={[
+              { key: 'nom', label: 'Structure mentionnée', render: (r) => <span className="font-bold">{r.nom}</span> },
+              { key: 'localisation', label: 'Localisation' },
+              { key: 'statut', label: 'Statut éditorial' },
+            ]}
+            rows={STRUCTURES}
+          />
+          <div className="mt-5"><Caveat>{CENTRES_CAVEAT}</Caveat></div>
         </Block>
       </Alternate>
     </>

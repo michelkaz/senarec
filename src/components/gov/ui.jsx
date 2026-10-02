@@ -1,6 +1,6 @@
 import { Children, cloneElement, createContext, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, Hammer } from 'lucide-react';
+import { AlertTriangle, ChevronRight, Hammer } from 'lucide-react';
 import { useReveal } from '../../hooks/useReveal';
 import FullPhoto from './FullPhoto';
 import { Backdrop } from './Photo';
@@ -129,6 +129,69 @@ export function InProgress({ title = 'Contenu en cours de rédaction', text, com
         ))}
       </div>
       <span className={`mt-4 text-[11px] font-bold uppercase tracking-widest ${dark ? 'text-rdcGold' : 'text-redText'}`}>En cours de rédaction</span>
+    </div>
+  );
+}
+
+/** Encart « à confirmer » — rend visible un point de vigilance du cahier éditorial sans jamais le transformer en fait établi. */
+export function Caveat({ children, label = 'À confirmer' }) {
+  const tone = useTone();
+  const dark = tone === 'dark';
+  return (
+    <div className={`reveal-card flex gap-3 rounded-lg border px-4 py-3.5 text-sm ${dark ? 'border-rdcGold/40 bg-rdcGold/10 text-amber-100' : 'border-amber-300 bg-amber-50 text-amber-900'}`}>
+      <AlertTriangle size={18} className="shrink-0 mt-0.5 text-amber-500" aria-hidden="true" />
+      <p><span className="font-bold uppercase tracking-wide text-xs mr-1.5">{label} —</span>{children}</p>
+    </div>
+  );
+}
+
+const STATUS_TONES = {
+  'En cours': 'bg-emerald-600/15 text-emerald-700 border-emerald-500/40',
+  Opérationnel: 'bg-emerald-600/15 text-emerald-700 border-emerald-500/40',
+  Terminé: 'bg-slate-500/15 text-slate-600 border-slate-400/40',
+  Préparation: 'bg-sky-600/15 text-sky-700 border-sky-500/40',
+  'À confirmer': 'bg-amber-500/15 text-amber-700 border-amber-500/40',
+};
+
+export function StatusBadge({ status }) {
+  const tone = useTone();
+  const dark = tone === 'dark';
+  const cls = STATUS_TONES[status] || STATUS_TONES['À confirmer'];
+  return (
+    <span className={`inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border ${dark ? 'bg-white/10 border-white/25 text-white' : cls}`}>
+      <span className="w-1.5 h-1.5 rounded-full bg-current" /> {status}
+    </span>
+  );
+}
+
+/** Tableau simple et responsive (empilé en cartes sous md). */
+export function DataTable({ columns, rows, keyField }) {
+  const tone = useTone();
+  const dark = tone === 'dark';
+  const border = dark ? 'border-white/15' : 'border-sableDeep';
+  return (
+    <div className={`reveal-card rounded-lg border ${border} overflow-hidden`}>
+      <table className="block md:table w-full text-sm">
+        <caption className="sr-only">Tableau de données</caption>
+        <thead className={`hidden md:table-header-group ${dark ? 'bg-white/10' : 'bg-govDark text-white'}`}>
+          <tr>
+            {columns.map((c) => (
+              <th key={c.key} scope="col" className="text-left font-bold uppercase tracking-wide text-[11px] px-4 py-3">{c.label}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className={`divide-y ${border} md:[&>tr]:table-row block md:table-row-group`}>
+          {rows.map((r) => (
+            <tr key={r[keyField]} className={`block md:table-row px-4 py-3 md:p-0 ${dark ? '' : 'odd:bg-white even:bg-sable/40'}`}>
+              {columns.map((c) => (
+                <td key={c.key} data-label={c.label} className="block md:table-cell px-4 py-1.5 md:py-3 before:content-[attr(data-label)] before:block before:text-[10px] before:font-bold before:uppercase before:tracking-wide before:opacity-60 md:before:content-none">
+                  {c.render ? c.render(r) : r[c.key]}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

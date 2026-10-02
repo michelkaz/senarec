@@ -1,5 +1,5 @@
-import { ACTIVITES } from '../../data/site';
-import { Accent, Alternate, Block, Card, HeroAccent, PageHero } from '../../components/gov/ui';
+import { ACTIVITES_TYPES } from '../../data/cahier';
+import { Accent, Alternate, Block, DataTable, HeroAccent, InProgress, PageHero } from '../../components/gov/ui';
 
 export default function Activites() {
   return (
@@ -8,21 +8,22 @@ export default function Activites() {
         crumbs={[{ label: 'Renforcement des capacités', to: '/renforcement-capacites' }, { label: 'Activités' }]}
         eyebrow="Renforcement des capacités"
         title={<><HeroAccent>Activités</HeroAccent> du SENAREC</>}
-        lead="Ateliers, conférences, États généraux et séminaires organisés ou suivis par le SENAREC."
+        lead="Les interventions réalisées, reliées au programme concerné, au territoire, aux bénéficiaires, aux livrables et aux résultats."
       />
       <Alternate>
-        <Block eyebrow="Nos formats" title={<>Quatre types <Accent>d'activités</Accent></>}>
-          <div className="grid sm:grid-cols-2 gap-5">
-            {ACTIVITES.map((a, i) => (
-              <Card key={a.label} accent={['border-l-rdcBlue', 'border-l-rdcGold', 'border-l-rdcRed', 'border-l-rdcBlue'][i]}>
-                <h3 className="font-bold text-lg">{a.label}</h3>
-                <p className="text-sm opacity-85 mt-2">{a.desc}</p>
-                <span className="mt-4 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-redText">
-                  <span className="dot-pulse w-2 h-2 rounded-full bg-rdcGold" /> Comptes rendus en cours de rédaction
-                </span>
-              </Card>
-            ))}
-          </div>
+        <Block eyebrow="Typologie" title={<>Six types <Accent>d'activités</Accent></>}>
+          <DataTable
+            keyField="type"
+            columns={[
+              { key: 'type', label: 'Type', render: (r) => <span className="font-bold">{r.type}</span> },
+              { key: 'contenu', label: 'Contenu minimal' },
+              { key: 'indicateur', label: 'Indicateur conseillé' },
+            ]}
+            rows={ACTIVITES_TYPES}
+          />
+        </Block>
+        <Block eyebrow="Journal des activités" title="Activités réalisées">
+          <InProgress title="Journal en cours de constitution" text="Les ateliers, séminaires, conférences et missions réalisés seront publiés ici, avec leur date, leur lieu et leurs résultats, au fur et à mesure de leur validation." />
         </Block>
       </Alternate>
     </>

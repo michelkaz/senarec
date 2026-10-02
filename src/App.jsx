@@ -10,10 +10,12 @@ import Histoire from './pages/le-senarec/Histoire';
 import Message from './pages/le-senarec/Message';
 import Formations from './pages/capacites/Formations';
 import Programmes from './pages/capacites/Programmes';
+import ProgrammeDetail from './pages/capacites/ProgrammeDetail';
 import Activites from './pages/capacites/Activites';
 import Structures from './pages/capacites/Structures';
 import { Publications, Rapports, Guides, Mediatheque } from './pages/ressources-pages';
 import { Actualites, Evenements, Partenaires } from './pages/Simples';
+import Recherche from './pages/Recherche';
 import Contact from './pages/Contact';
 import Confidentialite from './pages/Confidentialite';
 import NotFound from './pages/NotFound';
@@ -34,6 +36,7 @@ export default function App() {
           <Route path="renforcement-capacites" element={<SectionIndex to="/renforcement-capacites" title="Renforcement des capacités" />} />
           <Route path="renforcement-capacites/formations" element={<Formations />} />
           <Route path="renforcement-capacites/programmes" element={<Programmes />} />
+          <Route path="renforcement-capacites/programmes/:slug" element={<ProgrammeDetail />} />
           <Route path="renforcement-capacites/activites" element={<Activites />} />
           <Route path="renforcement-capacites/structures" element={<Structures />} />
           <Route path="ressources" element={<SectionIndex to="/ressources" title="Ressources" />} />
@@ -44,6 +47,7 @@ export default function App() {
           <Route path="actualites" element={<Actualites />} />
           <Route path="evenements" element={<Evenements />} />
           <Route path="partenaires" element={<Partenaires />} />
+          <Route path="recherche" element={<Recherche />} />
           <Route path="contact" element={<Contact />} />
           <Route path="confidentialite" element={<Confidentialite />} />
           <Route path="*" element={<NotFound />} />

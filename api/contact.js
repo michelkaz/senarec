@@ -4,7 +4,8 @@ const RECIPIENT = process.env.CONTACT_TO || 'michelkaz05@gmail.com';
 const FROM = process.env.CONTACT_FROM || 'Site SENAREC <onboarding@resend.dev>';
 
 const MAX_BODY = 16 * 1024;
-const LIMITS = { nom: 100, email: 254, organisme: 150, telephone: 30, message: 3000 };
+const LIMITS = { nom: 100, email: 254, organisme: 150, telephone: 30, objet: 40, message: 3000 };
+const OBJETS = ['Information', 'Formation', 'Partenariat', 'Presse', 'Assistance BNCE', 'Plainte / suggestion', 'Autre'];
 const MIN_FILL_MS = 3000; // un humain met plus de 3 s à remplir le formulaire
 const MAX_AGE_MS = 24 * 3600 * 1000;
 const RATE = { max: 5, windowMs: 10 * 60 * 1000 };
@@ -80,6 +81,7 @@ export function validate(input) {
     email: oneLine(input.email).toLowerCase(),
     organisme: oneLine(input.organisme),
     telephone: oneLine(input.telephone),
+    objet: oneLine(input.objet),
     message: clean(input.message).replace(/\r\n?/g, '\n'),
   };
   for (const [k, max] of Object.entries(LIMITS)) if (v[k].length > max) errors[k] = 'Champ trop long.';
@@ -89,6 +91,7 @@ export function validate(input) {
   else if (!EMAIL_RE.test(v.email) || v.email.includes('..')) errors.email ||= 'Adresse email invalide.';
   if (v.organisme && !/^[^<>{}]+$/.test(v.organisme)) errors.organisme ||= 'Caractères non autorisés.';
   if (v.telephone && !PHONE_RE.test(v.telephone)) errors.telephone ||= 'Numéro de téléphone invalide.';
+  if (!v.objet || !OBJETS.includes(v.objet)) errors.objet = "Merci de préciser l'objet de votre demande.";
   if (!v.message) errors.message = 'Votre message est requis.';
   else if (v.message.length < 10) errors.message ||= 'Message trop court (10 caractères minimum).';
   return { values: v, errors };
@@ -127,12 +130,13 @@ export default async function handler(req, res) {
     return send(res, 503, { ok: false, error: "Le service d'envoi n'est pas disponible pour le moment." });
   }
 
-  const subject = `[Site SENAREC] Message de ${values.nom}`.slice(0, 200);
+  const subject = `[Site SENAREC] ${values.objet} — ${values.nom}`.slice(0, 200);
   const lines = [
     ['Nom', values.nom],
     ['Email', values.email],
-    ['Organisme', values.organisme || '—'],
+    ['Institution', values.organisme || '—'],
     ['Téléphone', values.telephone || '—'],
+    ['Objet', values.objet],
   ];
   const text = `${lines.map(([k, v]) => `${k} : ${v}`).join('\n')}\n\n${values.message}\n`;
   const html = `<div style="font-family:Arial,sans-serif;font-size:14px;color:#111"><table cellpadding="4">${lines

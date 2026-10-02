@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { section } from '../data/site';
-import { Alternate, Block, Card, PageHero } from '../components/gov/ui';
+import { DOMAINES, RESSOURCES_COLLECTIONS } from '../data/cahier';
+import { Accent, Alternate, Block, Card, PageHero } from '../components/gov/ui';
+import Process from '../components/gov/Process';
 
 const PHOTOS = {
   '/le-senarec': ['/images/hero-3.jpg', 'Siège du SENAREC à Kinshasa'],
@@ -30,6 +32,37 @@ export default function SectionIndex({ to, lead, title }) {
             ))}
           </div>
         </Block>
+
+        {to === '/renforcement-capacites' && (
+          <Block eyebrow="Méthode" title={<>Le processus <Accent>d'intervention</Accent></>} lead="Le SENAREC accompagne les institutions dans tout le cycle de développement des capacités.">
+            <Process />
+          </Block>
+        )}
+        {to === '/renforcement-capacites' && (
+          <Block eyebrow="Domaines d'intervention" title={<>Quatre <Accent>axes</Accent></>}>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {DOMAINES.map((d) => (
+                <Card key={d.axe}>
+                  <h3 className="font-bold text-sm">{d.axe}</h3>
+                  <p className="text-xs opacity-80 mt-2 leading-relaxed">{d.items}</p>
+                </Card>
+              ))}
+            </div>
+          </Block>
+        )}
+
+        {to === '/ressources' && (
+          <Block eyebrow="Modèle documentaire" title={<>Six <Accent>collections</Accent></>} lead="Chaque document publié portera un titre, un auteur institutionnel, une date, une version, un résumé, des mots-clés, un format et un niveau de diffusion.">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {RESSOURCES_COLLECTIONS.map((c) => (
+                <Card key={c.nom}>
+                  <h3 className="font-bold text-sm">{c.nom}</h3>
+                  <p className="text-xs opacity-80 mt-2 leading-relaxed">{c.desc}</p>
+                </Card>
+              ))}
+            </div>
+          </Block>
+        )}
       </Alternate>
     </>
   );

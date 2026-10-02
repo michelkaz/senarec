@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, Search, X } from 'lucide-react';
 import { NAV_TREE } from '../../data/site';
 
 function TriBar() {
@@ -96,6 +96,11 @@ function Mobile({ onClose }) {
 
   return (
     <div ref={panel} role="dialog" aria-modal="true" aria-label="Menu" className="xl:hidden fixed inset-0 top-[120px] bg-white z-40 overflow-y-auto">
+      <div className="px-4 pt-4">
+        <Link to="/recherche" onClick={onClose} className="flex items-center gap-2 text-sm font-bold text-govDark border border-sableDeep rounded-lg px-4 py-3">
+          <Search size={16} /> Rechercher sur le site
+        </Link>
+      </div>
       <ul className="px-4 py-4">
         {NAV_TREE.map((item) => (
           <li key={item.label} className="border-b border-slate-100 py-2">
@@ -164,6 +169,13 @@ export default function GovHeader() {
           </Link>
           <Desktop />
           <div className="flex items-center gap-2 shrink-0">
+            <Link
+              to="/recherche"
+              aria-label="Rechercher sur le site"
+              className="w-11 h-11 rounded flex items-center justify-center text-white hover:bg-white/10"
+            >
+              <Search size={20} />
+            </Link>
             <button
               type="button"
               aria-label={menu ? 'Fermer le menu' : 'Ouvrir le menu'}

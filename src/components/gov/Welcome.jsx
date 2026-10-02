@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronDown, Mail } from 'lucide-react';
+import { ArrowRight, ChevronDown, Database } from 'lucide-react';
 import Photo, { Backdrop } from './Photo';
+import { HERO } from '../../data/cahier';
 
 const WORDS = ['Former', 'pour', 'transformer'];
 
@@ -20,7 +21,8 @@ export default function Welcome() {
           <span className="rise inline-flex items-center gap-2 bg-rdcGold/15 border border-rdcGold/50 text-rdcGold px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-5">
             <span className="w-2 h-2 rounded-full bg-rdcGold animate-ping" /> Site officiel
           </span>
-          <p className="rise text-lg sm:text-xl font-semibold text-slate-200" style={{ animationDelay: '.1s' }}>Bienvenue sur le site du</p>
+          <p className="rise text-[11px] sm:text-xs font-bold uppercase tracking-widest text-slate-300" style={{ animationDelay: '.05s' }}>{HERO.surtitre}</p>
+          <p className="rise text-lg sm:text-xl font-semibold text-slate-200 mt-1" style={{ animationDelay: '.1s' }}>Bienvenue sur le site du</p>
           <h1 id="bienvenue" className="rise text-5xl sm:text-6xl font-extrabold tracking-tight leading-none mt-1" style={{ animationDelay: '.2s' }}>
             <span className="shine-text">SENAREC</span>
             <span className="sr-only"> — Secrétariat National pour le Renforcement des Capacités</span>
@@ -31,23 +33,21 @@ export default function Welcome() {
             ))}
           </p>
           <p className="rise mt-6 hidden sm:block text-base sm:text-lg text-slate-200 leading-relaxed max-w-xl" style={{ animationDelay: '.45s' }}>
-            Le Secrétariat National pour le Renforcement des Capacités coordonne le Programme National de Renforcement des
-            Capacités (PRONAREC) et accompagne la modernisation de l'Administration Publique en République Démocratique du Congo.
+            {HERO.chapo}
           </p>
           <div className="rise mt-6 sm:mt-8 flex flex-wrap gap-3" style={{ animationDelay: '.6s' }}>
-            <Link to="/le-senarec/presentation" className="group inline-flex items-center gap-2 bg-rdcGold hover:bg-yellow-300 text-slate-900 font-bold text-sm px-6 py-3.5 rounded-lg shadow-lg shadow-rdcGold/20 transition-all hover:-translate-y-0.5">
+            <Link to="/le-senarec/presentation" className="group inline-flex items-center gap-2 bg-rdcGold hover:bg-yellow-300 text-slate-900 font-bold text-sm px-5 py-3.5 rounded-lg shadow-lg shadow-rdcGold/20 transition-all hover:-translate-y-0.5">
               Découvrir le SENAREC <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link to="/renforcement-capacites" className="inline-flex items-center gap-2 bg-redText hover:bg-red-800 focus-visible:ring-4 focus-visible:ring-white/60 text-white font-bold text-sm px-6 py-3.5 rounded-lg transition-all hover:-translate-y-0.5">
-              Renforcement des capacités
+            <Link to="/renforcement-capacites/programmes" className="inline-flex items-center gap-2 bg-redText hover:bg-red-800 focus-visible:ring-4 focus-visible:ring-white/60 text-white font-bold text-sm px-5 py-3.5 rounded-lg transition-all hover:-translate-y-0.5">
+              Consulter nos programmes
             </Link>
-            <Link to="/contact" className="inline-flex items-center gap-2 border border-white/40 hover:bg-white hover:text-govDark text-white font-bold text-sm px-6 py-3.5 rounded-lg transition-all">
-              <Mail size={16} /> Nous contacter
+            <Link to="/renforcement-capacites/programmes/bnce" className="inline-flex items-center gap-2 border border-white/40 hover:bg-white hover:text-govDark text-white font-bold text-sm px-5 py-3.5 rounded-lg transition-all">
+              <Database size={16} /> Accéder à la BNCE
             </Link>
           </div>
           <p className="rise mt-6 sm:hidden text-base text-slate-200 leading-relaxed max-w-xl" style={{ animationDelay: '.7s' }}>
-            Le Secrétariat National pour le Renforcement des Capacités coordonne le Programme National de Renforcement des
-            Capacités (PRONAREC) et accompagne la modernisation de l'Administration Publique en République Démocratique du Congo.
+            {HERO.chapo}
           </p>
         </div>
 

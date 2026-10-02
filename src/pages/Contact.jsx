@@ -12,6 +12,8 @@ const EMAIL_RE = /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]{0
 const NAME_RE = /^[\p{L}\p{M}][\p{L}\p{M}' .,\-()]*$/u;
 const PHONE_RE = /^\+?[0-9 ().\-]{6,30}$/;
 
+export const OBJETS = ['Information', 'Formation', 'Partenariat', 'Presse', 'Assistance BNCE', 'Plainte / suggestion', 'Autre'];
+
 // Validation côté navigateur = confort. La validation qui fait foi est refaite côté serveur (api/contact.js).
 function check(f) {
   const n = {};
@@ -23,6 +25,7 @@ function check(f) {
   else if (!EMAIL_RE.test(email) || email.includes('..')) n.email = 'Adresse email invalide.';
   if (f.organisme && /[<>{}]/.test(f.organisme)) n.organisme = 'Caractères non autorisés.';
   if (f.telephone.trim() && !PHONE_RE.test(f.telephone.trim())) n.telephone = 'Numéro de téléphone invalide.';
+  if (!f.objet) n.objet = "Merci de préciser l'objet de votre demande.";
   const m = f.message.trim();
   if (!m) n.message = 'Votre message est requis.';
   else if (m.length < 10) n.message = 'Message trop court (10 caractères minimum).';
@@ -30,7 +33,7 @@ function check(f) {
 }
 
 function Form() {
-  const empty = { nom: '', email: '', organisme: '', telephone: '', message: '', website: '' };
+  const empty = { nom: '', email: '', organisme: '', telephone: '', objet: '', message: '', website: '' };
   const [f, setF] = useState(empty);
   const [err, setErr] = useState({});
   const [status, setStatus] = useState('idle'); // idle | sending | sent | error
@@ -43,7 +46,7 @@ function Form() {
     if (status === 'sending') return;
     const n = check(f);
     setErr(n);
-    const firstBad = ['nom', 'email', 'organisme', 'telephone', 'message'].find((k) => n[k]);
+    const firstBad = ['nom', 'email', 'organisme', 'telephone', 'objet', 'message'].find((k) => n[k]);
     if (firstBad) {
       document.getElementById(firstBad)?.focus();
       return;
@@ -93,8 +96,16 @@ function Form() {
     <form onSubmit={submit} noValidate className="grid sm:grid-cols-2 gap-5 bg-white rounded-lg border border-sableDeep p-6 sm:p-8 shadow-sm">
       {field('nom', 'Votre nom', 'text', true, 'name')}
       {field('email', 'Votre adresse email', 'email', true, 'email')}
-      {field('organisme', 'Organisme (facultatif)', 'text', false, 'organization')}
+      {field('organisme', 'Institution (facultatif)', 'text', false, 'organization')}
       {field('telephone', 'Téléphone (facultatif)', 'tel', false, 'tel')}
+      <div className="sm:col-span-2">
+        <label htmlFor="objet" className="block text-sm font-semibold text-govDark mb-1">Objet de la demande <span className="text-redText">*</span></label>
+        <select id="objet" name="objet" required aria-required="true" value={f.objet} onChange={set('objet')} aria-invalid={!!err.objet} className={`${inp} ${err.objet ? 'border-rdcRed' : 'border-sableDeep'}`}>
+          <option value="">Sélectionnez un objet</option>
+          {OBJETS.map((o) => <option key={o} value={o}>{o}</option>)}
+        </select>
+        {err.objet && <p role="alert" className="text-xs text-redText mt-1">{err.objet}</p>}
+      </div>
       {/* Champ piège anti-robots : invisible pour les humains */}
       <div className="hidden" aria-hidden="true">
         <label htmlFor="website">Ne pas remplir</label>

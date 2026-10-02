@@ -4,7 +4,7 @@ import { useReveal } from '../../hooks/useReveal';
 import FullPhoto from './FullPhoto';
 import Photo, { Backdrop } from './Photo';
 import { useCountUp } from '../../hooks/useCountUp';
-import { ArrowRight, Landmark, Mail, MapPin, Pause, Phone, Play } from 'lucide-react';
+import { AlertTriangle, ArrowRight, Landmark, Mail, MapPin, Pause, Phone, Play } from 'lucide-react';
 import { ABOUT, CONTACT, MANDATE, PROJECTS, STATS } from '../../data/content';
 import { ACTIVITES, COMMUNICATIONS, section } from '../../data/site';
 
@@ -76,7 +76,10 @@ export function Indicators() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {STATS.map((s) => <Stat key={s.key} s={s} />)}
         </div>
-        {/* À COMPLÉTER : période et source de chaque chiffre */}
+        <div className="reveal-card mt-6 flex gap-3 rounded-lg border border-rdcGold/40 bg-rdcGold/10 px-4 py-3.5 text-sm text-amber-100 max-w-3xl mx-auto">
+          <AlertTriangle size={18} className="shrink-0 mt-0.5 text-rdcGold" aria-hidden="true" />
+          <p><span className="font-bold uppercase tracking-wide text-xs mr-1.5">À confirmer —</span>Ces chiffres doivent encore recevoir une période, une source et un propriétaire de donnée avant publication définitive.</p>
+        </div>
       </div>
     </section>
   );
@@ -156,7 +159,7 @@ export function Actualites() {
   return (
     <section ref={rootRef} className="bg-sable py-20">
       <div className={wrap}>
-        <Head eyebrow="Actualités & activités" title={<>Ce que fait le <R>SENAREC</R></>} to="/actualites" link="Toutes les actualités" />
+        <Head eyebrow="Actualités & activités" title={<>Nos <R>rubriques</R> d'information</>} to="/actualites" link="Toutes les actualités" />
         <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
           {[...COMMUNICATIONS, ...ACTIVITES].map((c) => (
             <Link key={c.label} to={COMMUNICATIONS.includes(c) ? '/actualites' : '/renforcement-capacites/activites'} className="reveal-card border border-slate-200 rounded-lg p-5 hover:border-gov hover:shadow-md hover:-translate-y-1 transition-all bg-white">

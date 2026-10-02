@@ -1,4 +1,5 @@
 import { ABOUT } from '../../data/content';
+import { MISSION_GENERALE } from '../../data/cahier';
 import { Accent, Alternate, Block, Card, HeroAccent, PageHero, Text } from '../../components/gov/ui';
 
 export default function Presentation() {
@@ -24,6 +25,9 @@ export default function Presentation() {
               <p className="text-2xl font-extrabold">« {ABOUT.devise} »</p>
             </Card>
           </div>
+        </Block>
+        <Block eyebrow="Mission générale" title={<>Ce que fait le <Accent>SENAREC</Accent></>}>
+          <Text className="text-lg max-w-3xl">{MISSION_GENERALE}</Text>
         </Block>
         <Block eyebrow="Notre mission" title={<>Quatre <Accent>engagements</Accent></>}>
           <ul className="grid sm:grid-cols-2 gap-4">

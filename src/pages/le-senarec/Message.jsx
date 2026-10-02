@@ -1,5 +1,6 @@
+import { MESSAGE_COORDONNATEUR } from '../../data/cahier';
 import { TEAM } from '../../data/content';
-import { Alternate, Block, HeroAccent, InProgress, PageHero } from '../../components/gov/ui';
+import { Alternate, Block, Caveat, HeroAccent, PageHero, Text } from '../../components/gov/ui';
 
 export default function Message() {
   const coord = TEAM[0];
@@ -13,7 +14,16 @@ export default function Message() {
       />
       <Alternate>
         <Block>
-          <InProgress title="Message en cours de rédaction" text="Le message du Coordonnateur National sera publié ici, avec son portrait officiel, dès sa validation." />
+          <div className="max-w-3xl mx-auto space-y-5">
+            {MESSAGE_COORDONNATEUR.texte.map((p, i) => (
+              <Text key={i} className={i === 0 ? 'text-lg' : undefined}>{p}</Text>
+            ))}
+            <p className="font-bold text-govDark pt-2">
+              {MESSAGE_COORDONNATEUR.signataire}
+              <span className="block text-sm font-normal text-slate-600">{MESSAGE_COORDONNATEUR.fonction} — date de validation à renseigner</span>
+            </p>
+            <Caveat>{MESSAGE_COORDONNATEUR.caveat}</Caveat>
+          </div>
         </Block>
       </Alternate>
     </>

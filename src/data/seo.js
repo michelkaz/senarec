@@ -1,4 +1,5 @@
 import { NAV_TREE, THIN_PAGES, UTILITY_PAGES } from './site.js';
+import { PROGRAMMES } from './cahier.js';
 
 export const SITE = 'https://senarec-ochre.vercel.app';
 export const OG_IMAGE = `${SITE}/images/og.jpg`;
@@ -10,7 +11,9 @@ NAV_TREE.forEach((n) => {
   list.push({ path: n.to, label: n.label, desc: n.desc });
   n.children?.forEach((c) => list.push({ path: c.to, label: c.label, desc: c.desc }));
 });
+PROGRAMMES.forEach((p) => list.push({ path: `/renforcement-capacites/programmes/${p.slug}`, label: p.nom, desc: p.titre }));
 UTILITY_PAGES.forEach((u) => list.push({ path: u.to, label: u.label, desc: u.desc, utility: true }));
+list.push({ path: '/recherche', label: 'Recherche', desc: 'Recherche sur le portail du SENAREC.', utility: true });
 
 export const ROUTES = list.map((r) => ({
   ...r,
