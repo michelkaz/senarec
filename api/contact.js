@@ -1,6 +1,6 @@
 // Endpoint du formulaire de contact (fonction serverless Vercel, aussi servie par `npm run dev`).
 // Le destinataire n'existe QUE côté serveur : il ne transite jamais par le navigateur.
-const RECIPIENT = process.env.CONTACT_TO || 'michelkaz05@gmail.com';
+const RECIPIENT = process.env.CONTACT_TO || 'info@senarec.cd';
 const FROM = process.env.CONTACT_FROM || 'Site SENAREC <onboarding@resend.dev>';
 
 const MAX_BODY = 16 * 1024;
