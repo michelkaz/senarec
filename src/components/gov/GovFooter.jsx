@@ -88,7 +88,10 @@ export default function GovFooter() {
       <div className="bg-black/40 text-slate-300 text-[11px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between gap-2">
           <span>© {new Date().getFullYear()} République Démocratique du Congo — SENAREC. Tous droits réservés.</span>
-          <Link to="/confidentialite" className="hover:text-white underline-offset-4 hover:underline">Confidentialité</Link>
+          <div className="flex gap-4">
+            <Link to="/mentions-legales" className="hover:text-white underline-offset-4 hover:underline">Mentions légales</Link>
+            <Link to="/confidentialite" className="hover:text-white underline-offset-4 hover:underline">Confidentialité</Link>
+          </div>
         </div>
       </div>
     </footer>

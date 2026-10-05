@@ -22,7 +22,7 @@ export default function Message() {
             ))}
             <p className="font-bold text-govDark pt-2">
               {MESSAGE_COORDONNATEUR.signataire}
-              <span className="block text-sm font-normal text-slate-600">{MESSAGE_COORDONNATEUR.fonction} — date de validation à renseigner</span>
+              <span className="block text-sm font-normal text-slate-600">{MESSAGE_COORDONNATEUR.fonction}</span>
             </p>
           </div>
         </Block>

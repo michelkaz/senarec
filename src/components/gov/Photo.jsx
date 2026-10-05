@@ -10,25 +10,31 @@ export const photoUrl = (src, w) => {
   return `/images/opt/${k}-${width}.webp`;
 };
 
-/** Image responsive (WebP, srcset, dimensions réservées). Ne recadre jamais : à combiner avec object-contain. */
+/**
+ * Image responsive : AVIF puis WebP (navigateurs qui ne lisent pas l'AVIF), srcset, dimensions réservées.
+ * Ne recadre jamais : à combiner avec object-contain.
+ */
 export default function Photo({ src, alt = '', sizes = '100vw', eager = false, className = '' }) {
   const k = keyOf(src);
   const m = manifest[k];
   if (!m) return <img src={src} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" className={className} />;
-  const srcSet = m.widths.map((w) => `/images/opt/${k}-${w}.webp ${w}w`).join(', ');
+  const set = (ext) => m.widths.map((w) => `/images/opt/${k}-${w}.${ext} ${w}w`).join(', ');
+  const fallback = `/images/opt/${k}-${m.widths.at(-1)}.webp`;
   return (
-    <img
-      src={`/images/opt/${k}-${m.widths.at(-1)}.webp`}
-      srcSet={srcSet}
-      sizes={sizes}
-      width={m.w}
-      height={m.h}
-      alt={alt}
-      loading={eager ? 'eager' : 'lazy'}
-      fetchPriority={eager ? 'high' : undefined}
-      decoding="async"
-      className={className}
-    />
+    <picture className="block">
+      <source type="image/avif" srcSet={set('avif')} sizes={sizes} />
+      <source type="image/webp" srcSet={set('webp')} sizes={sizes} />
+      <img
+        src={fallback}
+        width={m.w}
+        height={m.h}
+        alt={alt}
+        loading={eager ? 'eager' : 'lazy'}
+        fetchPriority={eager ? 'high' : undefined}
+        decoding="async"
+        className={className}
+      />
+    </picture>
   );
 }
 

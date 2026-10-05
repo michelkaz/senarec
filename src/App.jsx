@@ -18,6 +18,7 @@ import { Actualites, Evenements, Partenaires } from './pages/Simples';
 import Recherche from './pages/Recherche';
 import Contact from './pages/Contact';
 import Confidentialite from './pages/Confidentialite';
+import MentionsLegales from './pages/MentionsLegales';
 import NotFound from './pages/NotFound';
 
 export default function App() {
@@ -50,6 +51,7 @@ export default function App() {
           <Route path="recherche" element={<Recherche />} />
           <Route path="contact" element={<Contact />} />
           <Route path="confidentialite" element={<Confidentialite />} />
+          <Route path="mentions-legales" element={<MentionsLegales />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

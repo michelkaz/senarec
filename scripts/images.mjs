@@ -20,7 +20,10 @@ for (const [key, file] of Object.entries(SRC)) {
   if (!widths.includes(width) && width <= WIDTHS.at(-1)) widths.push(width);
   else if (width > WIDTHS.at(-1)) widths.push(WIDTHS.at(-1));
   manifest[key] = { w: width, h: height, widths: [...new Set(widths)].sort((a, b) => a - b) };
-  for (const w of manifest[key].widths) await sharp(file).rotate().resize({ width: w }).webp({ quality: 80 }).toFile(`${OUT}/${key}-${w}.webp`);
+  for (const w of manifest[key].widths) {
+    await sharp(file).rotate().resize({ width: w }).webp({ quality: 80 }).toFile(`${OUT}/${key}-${w}.webp`);
+    await sharp(file).rotate().resize({ width: w }).avif({ quality: 55, effort: 4 }).toFile(`${OUT}/${key}-${w}.avif`);
+  }
   // Vignette floutée pour les fonds décoratifs (quelques centaines d'octets).
   await sharp(file).rotate().resize({ width: 48 }).webp({ quality: 50 }).toFile(`${OUT}/${key}-xs.webp`);
 }

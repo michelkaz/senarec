@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import GovHeader from '../gov/GovHeader';
 import GovFooter from '../gov/GovFooter';
+import { Analytics } from '@vercel/analytics/react';
 import Seo from './Seo';
 import ScrollToTop from './ScrollToTop';
 
@@ -14,6 +15,7 @@ export default function Layout() {
         <Outlet />
       </main>
       <GovFooter />
+      <Analytics />
     </div>
   );
 }

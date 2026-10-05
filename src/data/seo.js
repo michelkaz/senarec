@@ -13,6 +13,7 @@ NAV_TREE.forEach((n) => {
 });
 PROGRAMMES.forEach((p) => list.push({ path: `/renforcement-capacites/programmes/${p.slug}`, label: p.nom, desc: p.titre }));
 UTILITY_PAGES.forEach((u) => list.push({ path: u.to, label: u.label, desc: u.desc, utility: true }));
+list.push({ path: '/mentions-legales', label: 'Mentions légales', desc: 'Identification de l\'éditeur du site du SENAREC et conditions d\'utilisation.' });
 list.push({ path: '/recherche', label: 'Recherche', desc: 'Recherche sur le portail du SENAREC.', utility: true });
 
 export const ROUTES = list.map((r) => ({
