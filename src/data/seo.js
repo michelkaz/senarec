@@ -1,7 +1,7 @@
 import { NAV_TREE, THIN_PAGES, UTILITY_PAGES } from './site.js';
 import { PROGRAMMES } from './cahier.js';
 
-export const SITE = 'https://senarec-ochre.vercel.app';
+export const SITE = 'https://www.senarec.cd';
 export const OG_IMAGE = `${SITE}/images/og.jpg`;
 const NAME = 'SENAREC';
 const HOME_TITLE = 'SENAREC — Guichet unique du renforcement des capacités en RDC';
