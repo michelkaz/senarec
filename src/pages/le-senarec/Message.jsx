@@ -1,6 +1,6 @@
 import { MESSAGE_COORDONNATEUR } from '../../data/cahier';
 import { TEAM } from '../../data/content';
-import { Alternate, Block, Caveat, HeroAccent, PageHero, Text } from '../../components/gov/ui';
+import { Alternate, Block, HeroAccent, PageHero, Text } from '../../components/gov/ui';
 
 export default function Message() {
   const coord = TEAM[0];
@@ -11,6 +11,8 @@ export default function Message() {
         eyebrow="Le SENAREC"
         title={<>Message du <HeroAccent>Coordonnateur</HeroAccent></>}
         lead={`${coord.name} — ${coord.role}`}
+        photo="/images/projets/6.jpg"
+        photoAlt="Marcel Kanda Mukanya, Coordonnateur national du SENAREC, lors d'une intervention publique"
       />
       <Alternate>
         <Block>
@@ -22,7 +24,6 @@ export default function Message() {
               {MESSAGE_COORDONNATEUR.signataire}
               <span className="block text-sm font-normal text-slate-600">{MESSAGE_COORDONNATEUR.fonction} — date de validation à renseigner</span>
             </p>
-            <Caveat>{MESSAGE_COORDONNATEUR.caveat}</Caveat>
           </div>
         </Block>
       </Alternate>

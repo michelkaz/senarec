@@ -1,6 +1,6 @@
 import { CEARC, SUPPORT_POOLS } from '../../data/content';
-import { STRUCTURES, CENTRES_CAVEAT } from '../../data/cahier';
-import { Accent, Alternate, Block, Card, Caveat, DataTable, HeroAccent, PageHero } from '../../components/gov/ui';
+import { STRUCTURES } from '../../data/cahier';
+import { Accent, Alternate, Block, Card, DataTable, HeroAccent, PageHero } from '../../components/gov/ui';
 
 export default function Structures() {
   const cpparc = CEARC.organes.find((o) => o.name.includes('CPPARC'));
@@ -36,7 +36,6 @@ export default function Structures() {
             ]}
             rows={STRUCTURES}
           />
-          <div className="mt-5"><Caveat>{CENTRES_CAVEAT}</Caveat></div>
         </Block>
       </Alternate>
     </>

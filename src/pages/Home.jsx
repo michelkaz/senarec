@@ -1,7 +1,7 @@
 import Welcome from '../components/gov/Welcome';
 import GovHero from '../components/gov/GovHero';
 import { Engagements, CadreStrategique, DomainesIntervention, ProgrammesPrioritaires, BnceAgendaNewsletter } from '../components/gov/HomeBlocks';
-import { Indicators, PartnersBand, Mandat, Actualites, Ressources, ContactBand } from '../components/gov/GovSections';
+import { PartnersBand, Mandat, Actualites, Ressources, ContactBand } from '../components/gov/GovSections';
 
 export default function Home() {
   return (
@@ -11,7 +11,6 @@ export default function Home() {
       <Engagements />
       <CadreStrategique />
       <DomainesIntervention />
-      <Indicators />
       <Mandat />
       <ProgrammesPrioritaires />
       <Actualites />

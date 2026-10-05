@@ -1,6 +1,6 @@
 import { SUPPORT_POOLS, TEAM } from '../../data/content';
-import { ORGANISATION_STRUCTURE, ORGANISATION_CAVEAT } from '../../data/cahier';
-import { Accent, Alternate, Block, Card, Caveat, DataTable, HeroAccent, InProgress, PageHero } from '../../components/gov/ui';
+import { ORGANISATION_STRUCTURE } from '../../data/cahier';
+import { Accent, Alternate, Block, Card, DataTable, HeroAccent, InProgress, PageHero } from '../../components/gov/ui';
 
 const initials = (n) => n.split(' ').map((w) => w[0]).slice(0, 2).join('');
 
@@ -24,7 +24,6 @@ export default function Organisation() {
             ]}
             rows={ORGANISATION_STRUCTURE}
           />
-          <div className="mt-5"><Caveat>{ORGANISATION_CAVEAT}</Caveat></div>
         </Block>
         <Block eyebrow="Direction" title={<>L'équipe de <Accent>direction</Accent></>}>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">

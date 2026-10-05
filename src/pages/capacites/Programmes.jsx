@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react';
 import { PROGRAMMES } from '../../data/cahier';
 import { PROJECTS } from '../../data/content';
 import FullPhoto from '../../components/gov/FullPhoto';
-import { Accent, Alternate, Block, Caveat, HeroAccent, PageHero, StatusBadge } from '../../components/gov/ui';
+import { Accent, Alternate, Block, HeroAccent, PageHero, StatusBadge } from '../../components/gov/ui';
 
 export default function Programmes() {
   return (
@@ -39,9 +39,6 @@ export default function Programmes() {
           </div>
         </Block>
 
-        <Block>
-          <Caveat>Les fiches ci-dessus constituent un portefeuille éditorial initial ; elles ne remplacent pas les documents de projet officiels.</Caveat>
-        </Block>
       </Alternate>
     </>
   );

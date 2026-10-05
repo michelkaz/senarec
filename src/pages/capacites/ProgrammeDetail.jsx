@@ -1,6 +1,6 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { PROGRAMMES, BNCE_INFO } from '../../data/cahier';
-import { Accent, Alternate, Block, Card, Caveat, PageHero, StatusBadge, Text, TextLink } from '../../components/gov/ui';
+import { Accent, Alternate, Block, Card, PageHero, StatusBadge, Text, TextLink } from '../../components/gov/ui';
 
 export default function ProgrammeDetail() {
   const { slug } = useParams();
@@ -35,9 +35,6 @@ export default function ProgrammeDetail() {
               <p className="text-[11px] font-bold uppercase tracking-widest text-redText mb-2">Bénéficiaires</p>
               <p className="text-sm leading-relaxed">{p.beneficiaires}</p>
             </Card>
-          </div>
-          <div className="mt-8">
-            <Caveat>{p.caveat}</Caveat>
           </div>
         </Block>
 

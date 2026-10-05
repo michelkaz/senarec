@@ -9,7 +9,7 @@ const WORDS = ['Former', 'pour', 'transformer'];
 export default function Welcome() {
   return (
     <section aria-labelledby="bienvenue" className="relative overflow-hidden bg-govNight text-white">
-      <Backdrop src="/images/projets/6.jpg" className="absolute inset-0 w-full h-full object-cover blur-3xl scale-125 opacity-40" />
+      <Backdrop src="/images/hero-2.jpeg" className="absolute inset-0 w-full h-full object-cover blur-3xl scale-125 opacity-40" />
       <div className="absolute inset-0 bg-gradient-to-br from-govNight via-govDark/90 to-govDark/60" />
       <div className="absolute inset-0 grid-move" aria-hidden="true" />
       <span className="orb absolute -top-24 -left-24 w-80 h-80 rounded-full bg-rdcBlue/30 blur-3xl" aria-hidden="true" />
@@ -55,7 +55,7 @@ export default function Welcome() {
           <div className="float-y relative">
             <span className="absolute -inset-3 rounded-2xl bg-gradient-to-br from-rdcBlue via-rdcGold to-rdcRed opacity-60 blur-xl" aria-hidden="true" />
             <div className="relative aspect-[16/9] sm:aspect-[3/2] rounded-xl overflow-hidden bg-govNight shadow-2xl border-b-4 border-rdcGold">
-              <Photo src="/images/projets/6.jpg" alt="Intervention lors d'une cérémonie du SENAREC en présence de ses partenaires" sizes="(min-width:1024px) 58vw, 100vw" eager className="w-full h-full object-contain" />
+              <Photo src="/images/hero-2.jpeg" alt="Remise de certificats aux cadres formés par le SENAREC" sizes="(min-width:1024px) 58vw, 100vw" eager className="w-full h-full object-contain" />
             </div>
           </div>
         </div>

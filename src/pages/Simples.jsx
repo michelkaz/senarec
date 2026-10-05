@@ -1,6 +1,6 @@
 import { CalendarDays, MapPin } from 'lucide-react';
 import { ACTUALITES_PRETES, EVENEMENTS_ARCHIVES, PARTENAIRES } from '../data/cahier';
-import { Accent, Alternate, Block, Card, Caveat, HeroAccent, InProgress, PageHero, StatusBadge, Text } from '../components/gov/ui';
+import { Accent, Alternate, Block, Card, HeroAccent, InProgress, PageHero, StatusBadge, Text } from '../components/gov/ui';
 
 export function Actualites() {
   return (
@@ -74,9 +74,6 @@ export function Partenaires() {
           <div className="mt-6">
             <img src="/images/minplan.png" alt="Ministère du Plan" width="370" height="148" loading="lazy" className="h-16 w-auto rounded bg-white p-2 border border-sableDeep" />
           </div>
-        </Block>
-        <Block>
-          <Caveat>Les partenaires affichés par la Banque Nationale des Compétences et de l'Expertise ne sont pas repris automatiquement sur ce site : une preuve de collaboration et une autorisation sont requises au préalable, conformément au cahier éditorial.</Caveat>
         </Block>
       </Alternate>
     </>

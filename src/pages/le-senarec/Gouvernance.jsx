@@ -1,6 +1,5 @@
 import { CEARC, LEGAL } from '../../data/content';
-import { GOUVERNANCE_CAVEAT } from '../../data/cahier';
-import { Accent, Alternate, Block, Card, Caveat, HeroAccent, PageHero, Text } from '../../components/gov/ui';
+import { Accent, Alternate, Block, Card, HeroAccent, PageHero, Text } from '../../components/gov/ui';
 
 export default function Gouvernance() {
   return (
@@ -21,7 +20,6 @@ export default function Gouvernance() {
               </Card>
             ))}
           </div>
-          <div className="mt-5"><Caveat>{GOUVERNANCE_CAVEAT}</Caveat></div>
         </Block>
         <Block eyebrow="Base légale" title={<>Les textes <Accent>fondateurs</Accent></>}>
           <Text className="mb-6">{CEARC.legal}</Text>
